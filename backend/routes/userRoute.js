@@ -1,7 +1,7 @@
 const express=require('express')
 const bcrypt=require('bcrypt')
 const User=require('../models/userModel')
-
+const jwt=require('jsonwebtoken')
 const router=express.Router()
 
 router.post("/register",async (req,res)=>{
@@ -18,17 +18,24 @@ router.post("/register",async (req,res)=>{
         const hashedPassword=await bcrypt.hash(req.body.password,salt)
         req.body.password=hashedPassword
 
-       console.log(req.body)
+//       console.log(req.body)
 
        const requestBody=req.body
 
         //Schema will check for validation
         const newUser=new User(requestBody)
-       
-        //Commit the changes to db 
-        await newUser.save()
-        res.status(200).json({success:true,message:"User has been created"})
-
+        const user = await User.findOne({email:req.body.email})
+        if(!user)
+            {
+                await newUser.save()
+                //Commit the changes to db 
+                res.status(200).json({success:true,message:"User has been created"})
+            }
+        else
+        {
+            res.status(400).json({success:false,message:"User Already Registered"})    
+        }
+        
    }
    catch(e)
    {
@@ -56,7 +63,8 @@ router.post("/login",async (req,res)=>{
                 message:"Password is Invalid"
             })
         }
-    res.status(200).json({message:"User Login is Success"})
+        const token=jwt.sign({userId:user._id,randomKey:"randomValue"},process.env.JWT_SECRET,{expiresIn:'1d'})
+        res.status(200).json({success:true,message:"User Login is Success",jwtToken:token})
 })
 
 module.exports=router

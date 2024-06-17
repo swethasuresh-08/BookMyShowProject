@@ -1,5 +1,5 @@
 const express = require('express')
-
+const cors=require('cors')
 const userRoute=require('../backend/routes/userRoute')
 const PORT=5000
 
@@ -9,7 +9,7 @@ const dbConfig=require('./config/dbConfig')
 
 const app=express()
 app.use(express.json())
-
+app.use(cors())
 //Route Middleware
 app.use("/api/users",userRoute)
 
