@@ -10,17 +10,19 @@ import './stylesheets/custom.css'
 import './stylesheets/form-elements.css'
 import './stylesheets/sizes.css'
 import './stylesheets/theme.css'
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 function App() {
   return (
     <div className="App">
       <p>Book My Show Front end</p>
       <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-      </Routes>
+        <Routes>
+          <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+        </Routes>
       </BrowserRouter>
     </div>
   );

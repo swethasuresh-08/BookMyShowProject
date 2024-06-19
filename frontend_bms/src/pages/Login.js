@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Form,message,Button} from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LoginUser } from '../apicalls/users'
 
 function Login() {
+  const navigate=useNavigate()
+  useEffect(()=>{
+    if(localStorage.getItem("token"))
+      {
+        navigate("/")
+      }
+  },[])
   const onFinish=async (values)=>{
     console.log({values})
     try{
