@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import PageTitle from "../../components/PageTitle";
 import MoviesList from './MoviesList'
-
+import TheatresList from "./TheatresList";
 // import TheatresList from "./TheatresList";
 // import UpcomingList from './UpcomingList'
 
 function Admin() {
+  
     const { user } = useSelector((state) => state.users);
     const navigate = useNavigate()
 
@@ -30,8 +31,8 @@ function Admin() {
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="Theatres" key="2">
-            {/* <UpcomingList/> */}
-            <p>Theaters</p>
+             <TheatresList/>
+            
         </Tabs.TabPane>
         
         <Tabs.TabPane tab="Upcoming Movies" key="3">

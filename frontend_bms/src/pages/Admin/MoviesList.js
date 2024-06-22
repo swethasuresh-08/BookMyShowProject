@@ -4,7 +4,7 @@ import MovieForm from "./MovieForm";
 import moment from "moment";
 import {Button, message, Table } from "antd";
 import { useDispatch } from "react-redux";
-import { GetAllMovies } from "../../apicalls/movies";
+import { DeleteMovie, GetAllMovies } from "../../apicalls/movies";
 //import { DeleteMovie, GetAllMovies } from "../../apicalls/movies";
 // import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 //  import { DeleteMovie, GetAllMovies } from "../../apicalls/movies";
@@ -31,6 +31,25 @@ function MoviesList() {
     }
   }
  
+  const handleDelete=async(movieId)=>{
+    try{
+      const response=await DeleteMovie({
+        movieId:movieId
+      })
+      if(response.data.success)
+        {
+          message.success("Movie Deleted SuccessFully")
+          getData()
+        }
+      else
+      message.error("Error in deletion")
+    }
+    catch(error)
+    {
+      console.log(error)
+      message.error("Something Went Wrong")
+    }
+  }
   useEffect(()=>{
   
     getData()
@@ -90,7 +109,7 @@ function MoviesList() {
             <i
               className="ri-delete-bin-line"
               onClick={() => {
-               //handleDelete(record._id);
+               handleDelete(record._id);
               }}
             ></i>
             <i

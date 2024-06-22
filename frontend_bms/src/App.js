@@ -12,6 +12,7 @@ import './stylesheets/sizes.css'
 import './stylesheets/theme.css'
 import ProtectedRoute from './components/ProtectedRoute';
 import Admin from './pages/Admin';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/Admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
+          <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -33,3 +33,14 @@ export const UpdateMovie=async (payload)=>{
         return error
     }
 }
+
+export const DeleteMovie=async (payload)=>{
+    try{
+        const response = await axiosInstance.post('http://localhost:5000/api/movies/delete-movie',payload)
+        return response
+    }
+    catch(error)
+    {
+        return error
+    }
+}
