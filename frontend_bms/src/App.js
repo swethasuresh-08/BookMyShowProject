@@ -11,6 +11,7 @@ import './stylesheets/form-elements.css'
 import './stylesheets/sizes.css'
 import './stylesheets/theme.css'
 import ProtectedRoute from './components/ProtectedRoute';
+import Admin from './pages/Admin';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/Admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </div>
