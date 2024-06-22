@@ -1,7 +1,9 @@
 const router=require("express").Router()
 const Movie=require("../models/movieModel")
+const authMiddleware=require('../middleware/authMiddleware')
 
-router.post("/add-movie",async (req,res)=>{
+
+router.post("/add-movie",authMiddleware,async (req,res)=>{
     try{
         const newMovie=new Movie(req.body)
         await newMovie.save()
@@ -18,7 +20,7 @@ router.post("/add-movie",async (req,res)=>{
     }
 })
 
-router.get("/get-movie",async (req,res)=>{
+router.get("/get-movie",authMiddleware,async (req,res)=>{
     try{
         const movies=await Movie.find()
         res.status(200).json({
@@ -35,7 +37,7 @@ router.get("/get-movie",async (req,res)=>{
     }
 })
 
-router.post("/update-movie",async (req,res)=>{
+router.post("/update-movie",authMiddleware,async (req,res)=>{
     try{
        await Movie.findByIdAndUpdate(req.body.movieId,req.body)
         res.send({
@@ -49,6 +51,23 @@ router.post("/update-movie",async (req,res)=>{
         res.send({
             success:false,
             error:"Something went wrong"
+        })
+    }
+})
+
+router.post("/delete-movie",authMiddleware,async (req,res)=>{
+    try{
+        await Movie.findByIdAndDelete(req.body.movieId)
+        res.send({
+            success:true,
+            message:"Movie Deleted successfully"
+        })
+    }
+    catch(error)
+    {
+        res.send({
+            success:false,
+            message:"Something went wrong"
         })
     }
 })
