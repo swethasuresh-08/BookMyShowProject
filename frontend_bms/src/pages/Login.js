@@ -18,6 +18,7 @@ function Login() {
       if(data.success)
         {
           localStorage.setItem("token",data.jwtToken)
+          navigate("/")
           message.success(data.message)
         }
         else

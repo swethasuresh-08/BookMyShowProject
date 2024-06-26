@@ -4,6 +4,7 @@ import TheatreForm from "./TheatresForm";
 import { GetTheatresByUserId} from '../../apicalls/theatres.js'
 import { useDispatch, useSelector } from "react-redux";
 import { message, Table, Button } from "antd";
+import Shows from './Shows'
 
 function TheatresList() {
 
@@ -100,17 +101,17 @@ function TheatresList() {
               }}
             ></i>
 
-            {/* {record.isActive && (
+            {record.isActive && (
               <span
                 className="underline"
                 onClick={() => {
                   setSelectedTheatre(record);
-                  setOpenShowsModal(true);
+                 setOpenShowsModal(true);
                 }}
               >
                 Shows
               </span>
-            )} */}
+            )} 
           </div>
         );
       },
@@ -146,7 +147,16 @@ function TheatresList() {
           getData={getData}
         />
       )}
+     {
+      openShowsModal && 
+      <Shows
+      openShowsModal={openShowsModal}
+      setOpenShowsModal={setOpenShowsModal}
+      theatre={selectedTheatre}
+      />
 
+    
+    } 
     </div>
   );
 }
