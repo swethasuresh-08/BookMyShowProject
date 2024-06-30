@@ -24,6 +24,17 @@ export const GetAllTheatres=async ()=>{
         return error
     }
 }
+
+export const GetAllTheatresForMovie=async (movieId)=>{
+    try{
+        const response=await axiosInstance.get(`http://localhost:5000/api/theatres/get-theatres-for-movie/${movieId}`)
+        return response
+    }
+    catch(error)
+    {
+        return error
+    }
+}
 export const AddTheatre=async (payload)=>{
     try{
 

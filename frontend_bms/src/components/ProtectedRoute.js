@@ -13,15 +13,14 @@ function ProtectedRoute({ children }) {
  //UseNavigate is a hook provided by react router
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
-
+//console.log({user})
   useEffect(()=>{
   const getPresentUser=async ()=>{
   try{
     const response=await GetCurrentUser()
-   
     if(response.success)
       {
-        console.log(response)
+        //console.log(response)
         dispatch(setUser(response.data))
       }
       else

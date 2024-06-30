@@ -12,7 +12,16 @@ export const GetShowsByTheatreId=async (theatreId)=>{
         return error
     }
 }
-
+export const GetShowById=async (showId)=>{
+    try{
+        const response=await axiosInstance.get(`http://localhost:5000/api/shows/get-show-by-id/${showId}`)
+        return response
+    }
+    catch(error)
+    {
+        return error
+    }
+}
 export const AddShow=async (payload)=>{
     try{
 

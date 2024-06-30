@@ -15,6 +15,7 @@ function Login() {
     console.log({values})
     try{
       const {data}=await LoginUser(values)
+      //console.log(response)
       if(data.success)
         {
           localStorage.setItem("token",data.jwtToken)
@@ -25,11 +26,8 @@ function Login() {
         {
           message.error(data.message)
         }
-    }
-    catch(e)
-    {
-
-    }
+   
+  }catch(e){}
   }
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
