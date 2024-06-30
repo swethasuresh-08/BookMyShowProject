@@ -17,6 +17,7 @@ const app=express()
 app.use(express.json())
 app.use(cors())
 //Route Middleware
+app.use(express.static("build"))
 app.use("/api/users",userRoute)
 app.use("/api/movies",movieRoute)
 app.use("/api/theatres",theatreRoute)
