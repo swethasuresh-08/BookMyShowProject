@@ -37,6 +37,24 @@ router.get("/get-movie",authMiddleware,async (req,res)=>{
     }
 })
 
+router.get("/get-movie-by-id/:movieId",authMiddleware,async (req,res)=>{
+    try{
+        const movie=await Movie.findById(req.params.movieId)
+      //  console.log(movie)
+        res.status(200).send({
+            success:true,
+            message:"Movie Fetched",
+            movie
+        })
+    }catch(error)
+    {
+        res.status(500).json({
+            success:false,
+            message:"There was error fetching movie"
+        })
+    }
+})
+
 router.post("/update-movie",authMiddleware,async (req,res)=>{
     try{
        await Movie.findByIdAndUpdate(req.body.movieId,req.body)

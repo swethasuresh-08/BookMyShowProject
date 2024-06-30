@@ -1,6 +1,7 @@
 const router=require("express").Router()
 const Theatre=require("../models/theatreModel")
 const authMiddleware=require('../middleware/authMiddleware')
+const Show =require("../models/showModel")
 
 router.get("/get-all-theatres-by-user-id", authMiddleware, async (req, res) => {
     try {
@@ -101,6 +102,46 @@ router.post("/delete-theatre",authMiddleware,async (req,res)=>{
         res.send({
             success:false,
             message:"Something went wrong"
+        })
+    }
+})
+router.get("/get-theatres-for-movie/:movieId",async (req,res)=>{
+    try{
+
+        const movieId=req.params.movieId
+        //console.log(movieId)
+        const shows=await Show.find(
+            {movie:movieId}
+        ).populate("theatre")
+        
+        const uniqueTheatres=[]
+
+        shows.forEach((show)=>{
+             const theatre=uniqueTheatres.find(currentTheatre=>currentTheatre._id===show.theatre._id)
+             //let showForTheatres=[]
+             if(!theatre)
+                 {
+                      const showForTheatres=shows.filter(
+                         (showObj)=>show.theatre._id===showObj.theatre._id
+                     )
+                    //console.log(showForTheatres)
+                     uniqueTheatres.push({
+                         shows:showForTheatres,
+                         ...show.theatre._doc
+                     })
+                 }
+         })
+        res.send({
+            success:true,
+            message:"Theatres for movie fetched",
+            data:uniqueTheatres
+        })
+    }catch(e)
+    {
+        console.log(e)
+        res.send({
+            success:false,
+            message:"Theates not fetched",
         })
     }
 })

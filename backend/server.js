@@ -4,6 +4,7 @@ const userRoute=require('../backend/routes/userRoute')
 const movieRoute=require('./routes/movieRoute')
 const theatreRoute=require('./routes/theatreRoute')
 const showRoute=require('./routes/showRoute')
+const bookingRoute=require('./routes/bookingRoute')
 
 const PORT=5000
 
@@ -20,6 +21,8 @@ app.use("/api/users",userRoute)
 app.use("/api/movies",movieRoute)
 app.use("/api/theatres",theatreRoute)
 app.use("/api/shows",showRoute)
+app.use("/api/booking",bookingRoute)
+
 //Start Server
 app.listen(PORT,()=>{
     console.log("Server started successfully")

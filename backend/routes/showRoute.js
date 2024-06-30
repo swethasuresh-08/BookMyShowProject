@@ -20,6 +20,23 @@ router.get("/get-all-shows-by-theatre-id/:theatreId", authMiddleware, async (req
     }
 })
 
+router.get("/get-show-by-id/:showId",authMiddleware,async(req,res)=>{
+    try {
+        const show = await Show.findById(req.params.showId).populate("movie").populate("theatre")
+        console.log(req.params.theatreId)
+        
+        res.status(200).send({
+            success: true,
+            message: "show fetched",
+            show
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "There was some issue in fetching shows for user.",
+        })
+    }
+})
 // router.get("/get-all-theatres", async (req, res) => {
 //     try {
 //         const theatres = await Theatre.find().populate("owner","-password")
