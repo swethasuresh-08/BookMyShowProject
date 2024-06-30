@@ -1,10 +1,11 @@
 
 import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
+import { BASEURL } from "./booking";
 
 export const GetShowsByTheatreId=async (theatreId)=>{
     try{
-        const response=await axiosInstance.get(`http://localhost:5000/api/shows/get-all-shows-by-theatre-id/${theatreId}`)
+        const response=await axiosInstance().get(`https://${BASEURL}/api/shows/get-all-shows-by-theatre-id/${theatreId}`)
         return response
     }
     catch(error)
@@ -14,7 +15,7 @@ export const GetShowsByTheatreId=async (theatreId)=>{
 }
 export const GetShowById=async (showId)=>{
     try{
-        const response=await axiosInstance.get(`http://localhost:5000/api/shows/get-show-by-id/${showId}`)
+        const response=await axiosInstance().get(`https://${BASEURL}/api/shows/get-show-by-id/${showId}`)
         return response
     }
     catch(error)
@@ -25,7 +26,7 @@ export const GetShowById=async (showId)=>{
 export const AddShow=async (payload)=>{
     try{
 
-        const response=await axiosInstance.post('http://localhost:5000/api/shows/add-show',payload) 
+        const response=await axiosInstance().post(`https://${BASEURL}/api/shows/add-show`,payload) 
         return response
     }catch(error)
     {
@@ -35,7 +36,7 @@ export const AddShow=async (payload)=>{
 
 export const DeleteShow=async (payload)=>{
     try{
-        const response = await axiosInstance.post('http://localhost:5000/api/shows/delete-show',payload)
+        const response = await axiosInstance().post(`https://${BASEURL}/api/shows/delete-show`,payload)
         return response
     }
     catch(error)
@@ -45,7 +46,7 @@ export const DeleteShow=async (payload)=>{
 }
 // export const GetAllTheatres=async ()=>{
 //     try{
-//         const response=await axiosInstance.get('http://localhost:5000/api/theatres/get-all-theatres')
+//         const response=await axiosInstance().get(`https://${BASEURL}/api/theatres/get-all-theatres')
 //         return response
 //     }
 //     catch(error)
@@ -56,7 +57,7 @@ export const DeleteShow=async (payload)=>{
 
 // export const UpdateTheatre=async (payload)=>{
 //     try{
-//         const response = await axiosInstance.post('http://localhost:5000/api/theatres/update-theatre',payload)
+//         const response = await axiosInstance().post(`https://${BASEURL}/api/theatres/update-theatre',payload)
 //         return response
 //     }
 //     catch(error)

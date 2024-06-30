@@ -1,9 +1,9 @@
 import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
-
+import { BASEURL } from "./booking";
 export const GetAllMovies=async ()=>{
     try{
-        const response=await axiosInstance.get('http://localhost:5000/api/movies/get-movie')
+        const response=await axiosInstance().get(`https://${BASEURL}/api/movies/get-movie`)
         return response
     }
     catch(error)
@@ -14,7 +14,7 @@ export const GetAllMovies=async ()=>{
 
 export const GetMovieById=async (movieId)=>{
     try{
-        const response=await axiosInstance.get(`http://localhost:5000/api/movies/get-movie-by-id/${movieId}`)
+        const response=await axiosInstance().get(`https://${BASEURL}/api/movies/get-movie-by-id/${movieId}`)
         return response
     }
     catch(error)
@@ -26,7 +26,7 @@ export const GetMovieById=async (movieId)=>{
 export const AddMovie=async (payload)=>{
     try{
 
-        const response=await axiosInstance.post('http://localhost:5000/api/movies/add-movie',payload) 
+        const response=await axiosInstance().post(`https://${BASEURL}/api/movies/add-movie`,payload) 
         return response
     }catch(error)
     {
@@ -36,7 +36,7 @@ export const AddMovie=async (payload)=>{
 
 export const UpdateMovie=async (payload)=>{
     try{
-        const response = await axiosInstance.post('http://localhost:5000/api/movies/update-movie',payload)
+        const response = await axiosInstance.post(`https://${BASEURL}/api/movies/update-movie`,payload)
         return response
     }
     catch(error)
@@ -47,7 +47,7 @@ export const UpdateMovie=async (payload)=>{
 
 export const DeleteMovie=async (payload)=>{
     try{
-        const response = await axiosInstance.post('http://localhost:5000/api/movies/delete-movie',payload)
+        const response = await axiosInstance().post(`https://${BASEURL}/api/movies/delete-movie`,payload)
         return response
     }
     catch(error)
