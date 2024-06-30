@@ -24,6 +24,10 @@ app.use("/api/theatres",theatreRoute)
 app.use("/api/shows",showRoute)
 app.use("/api/booking",bookingRoute)
 
+app.get('/profile', function (req, res) {
+    res.redirect('/');
+});
+
 //Start Server
 app.listen(PORT,()=>{
     console.log("Server started successfully")
